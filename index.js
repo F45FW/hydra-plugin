@@ -1,6 +1,6 @@
 'use strict';
 
-//const HydraEvent = require('./events');
+const equal = require('deep-equal');
 
 /**
  * @name HydraPlugin
@@ -44,8 +44,7 @@ class HydraPlugin {
     this.serviceConfig = serviceConfig;
     this.hydraConfig = serviceConfig.hydra;
     let opts = (this.hydraConfig.plugins && this.hydraConfig.plugins[this.name]) || {};
-    let isEqual = (JSON.stringify(this.opts) == JSON.stringify(opts));
-    if (!isEqual) {
+    if (!equal(this.opts, opts)) {
       this.configChanged(opts);
     }
   }
